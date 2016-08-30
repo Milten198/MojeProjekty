@@ -13,13 +13,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class AddDialogFragment extends DialogFragment {
 
     EditText mUserName, mUserSurname, mUserEmail, mUserAge;
     Button confirmButton, cancelButton;
+    List<ContactInfoList> contactInfoLists = Collections.EMPTY_LIST;
 
     public interface ContactInfoListener {
-        void onFinishUserDialog(String userName, String userSurname, String userEmail, String userAge);
+        void onFinishUserDialog(List<ContactInfoList> list);
     }
 
     public AddDialogFragment() {
@@ -50,11 +55,19 @@ public class AddDialogFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
                 ContactInfoListener contactInfoListener = (ContactInfoListener) getActivity();
-                String name = mUserName.getText().toString();
-                String surname = mUserSurname.getText().toString();
-                String email = mUserEmail.getText().toString();
-                String age = mUserAge.getText().toString();
-                contactInfoListener.onFinishUserDialog(name, surname, email, age);
+
+                contactInfoLists = new ArrayList<ContactInfoList>();
+                ContactInfoList singleContactInfo = new ContactInfoList();
+
+                singleContactInfo.name = mUserName.getText().toString();
+                singleContactInfo.surname = mUserSurname.getText().toString();
+                singleContactInfo.email = mUserEmail.getText().toString();
+                singleContactInfo.age = mUserAge.getText().toString();
+
+                contactInfoLists.add(singleContactInfo);
+
+
+                contactInfoListener.onFinishUserDialog(contactInfoLists);
                 dismiss();
             }
         });

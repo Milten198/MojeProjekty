@@ -67,7 +67,9 @@ public class MainActivity extends AppCompatActivity implements AddDialogFragment
     }
 
     @Override
-    public void onFinishUserDialog(String userName, String userSurname, String userEmail, String userAge) {
-        Toast.makeText(this, "Name " + userName + " Surname " + userSurname + " email " + userEmail + " age " + userAge, Toast.LENGTH_LONG).show();
+    public void onFinishUserDialog(List<ContactInfoList> infoLists) {
+        ContactInfoList singleContact = new ContactInfoList();
+        singleContact = infoLists.get(0);
+        Toast.makeText(this, singleContact.name, Toast.LENGTH_LONG).show();
     }
 }
