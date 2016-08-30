@@ -1,18 +1,24 @@
 package com.example.android.contactlist;
 
 import android.content.res.Resources;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddDialogFragment.ContactInfoListener {
 
     RecyclerView recyclerView;
     ContactAdapter adapter;
+    AddDialogFragment editNameDialogFragment = new AddDialogFragment();
+    EditText editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ContactAdapter(this, loadMockData());
         recyclerView.setAdapter(adapter);
     }
-
 
 
     public List<SingleRowRepresentation> loadMockData() {
@@ -50,5 +55,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return allElements;
+    }
+
+    public void addContact(View view) {
+        FragmentManager fm = getSupportFragmentManager();
+        editNameDialogFragment = new AddDialogFragment();
+        editNameDialogFragment.show(fm, "das");
+    }
+
+    public void removeContact(View view) {
+    }
+
+    @Override
+    public void onFinishUserDialog(String userName, String userSurname, String userEmail, String userAge) {
+        Toast.makeText(this, "Name " + userName + " Surname " + userSurname + " email " + userEmail + " age " + userAge, Toast.LENGTH_LONG).show();
     }
 }
