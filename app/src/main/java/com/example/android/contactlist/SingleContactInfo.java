@@ -1,6 +1,6 @@
 package com.example.android.contactlist;
 
-public class ContactInfoList {
+public class SingleContactInfo {
     String name;
     String surname;
     String email;

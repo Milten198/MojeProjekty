@@ -24,6 +24,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.contactlist.MainActivity" />
         </activity>
+
+        <provider
+            android:authorities="com.example.android.contactlist.Data"
+            android:name=".Data.ContactProvider"
+            android:exported="true"
+            android:multiprocess="true"/>
     </application>
 
 </manifest>

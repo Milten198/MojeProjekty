@@ -54,7 +54,7 @@ public class TestDb extends AndroidTestCase {
     }
 
     public long insertRow(SQLiteDatabase db) {
-        ContentValues values = TestUtilities.createContactsContentValues();
+        ContentValues values = TestUtils.loadData();
         long rowId = db.insert(TABLE_NAME, null, values);
         return rowId;
     }

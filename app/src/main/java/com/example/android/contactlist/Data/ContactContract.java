@@ -1,5 +1,7 @@
 package com.example.android.contactlist.Data;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
@@ -8,14 +10,27 @@ public class ContactContract {
     public static final String CONTENT_AUTHORITY = "com.example.android.contactlist.Data";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
+
     public static final String PATH_CONTACTS = "contacts";
 
     public static final class ContactEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =
+                BASE_CONTENT_URI.buildUpon().appendPath(PATH_CONTACTS).build();
+
+        public static final String CONTENT_DIR_TYPE =
+                ContentResolver.CURSOR_DIR_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CONTACTS;
+        public static final String CONTENT_ITEM_TYPE =
+                ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_CONTACTS;
 
         public static final String TABLE_NAME = "contacts";
         public static final String COLUMN_USER_NAME = "name";
         public static final String COLUMN_USER_SURNAME = "surname";
         public static final String COLUMN_USER_EMAIL = "email";
         public static final String COLUMN_USER_AGE = "age";
+
+        public static Uri buildContactUri(long id) {
+            return ContentUris.withAppendedId(CONTENT_URI, id);
+        }
     }
 }
