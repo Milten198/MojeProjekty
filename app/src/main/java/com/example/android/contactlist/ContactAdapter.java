@@ -14,10 +14,10 @@ import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
 
-    List<SingleRowRepresentation> allElements = Collections.EMPTY_LIST;
+    List<SingleContactInfo> allElements = Collections.EMPTY_LIST;
     LayoutInflater inflater;
 
-    public ContactAdapter(Context context, List<SingleRowRepresentation> allElements) {
+    public ContactAdapter(Context context, List<SingleContactInfo> allElements) {
         this.allElements = allElements;
         inflater = LayoutInflater.from(context);
     }
@@ -31,13 +31,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     @Override
     public void onBindViewHolder(ContactViewHolder holder, int position) {
-        SingleRowRepresentation currentRow = allElements.get(position);
-        holder.idTextView.setText(currentRow.id);
+        SingleContactInfo currentRow = allElements.get(position);
         holder.nameTextView.setText(currentRow.name);
         holder.surnameTextView.setText(currentRow.surname);
         holder.emailTextView.setText(currentRow.email);
         holder.ageTextView.setText(currentRow.age);
-        holder.avatarImageView.setImageResource(currentRow.image);
     }
 
     @Override
@@ -47,18 +45,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nameTextView, surnameTextView, emailTextView, ageTextView, idTextView;
-        ImageView avatarImageView;
-
+        TextView nameTextView, surnameTextView, emailTextView, ageTextView;
 
         public ContactViewHolder(View itemView) {
             super(itemView);
-            idTextView = (TextView) itemView.findViewById(R.id.userId);
             nameTextView = (TextView) itemView.findViewById(R.id.userName);
             surnameTextView = (TextView) itemView.findViewById(R.id.userSurname);
             emailTextView = (TextView) itemView.findViewById(R.id.userEmail);
             ageTextView = (TextView) itemView.findViewById(R.id.userAge);
-            avatarImageView = (ImageView) itemView.findViewById(R.id.userStandardAvatar);
         }
     }
 }

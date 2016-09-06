@@ -40,28 +40,22 @@ public class MainActivity extends AppCompatActivity implements ContactInfoListen
     }
 
 
-    public List<SingleRowRepresentation> loadMockData() {
+    public List<SingleContactInfo> loadMockData() {
         Resources resources = getResources();
-        List<SingleRowRepresentation> allElements = new ArrayList<>();
-        int image = R.drawable.avatar;
+        List<SingleContactInfo> allElements = new ArrayList<>();
         String[] names = resources.getStringArray(R.array.names);
         String[] surnames = resources.getStringArray(R.array.surnames);
         String[] emails = resources.getStringArray(R.array.emails);
         String[] age = resources.getStringArray(R.array.age);
-        String[] ids = resources.getStringArray(R.array.id);
 
         for (int i = 0; i < 10; i++) {
-            SingleRowRepresentation singleRow = new SingleRowRepresentation();
+            SingleContactInfo singleRow = new SingleContactInfo();
             singleRow.name = names[i];
             singleRow.surname = surnames[i];
             singleRow.email = emails[i];
             singleRow.age = age[i];
-            singleRow.id = ids[i];
-            singleRow.image = image;
-
             allElements.add(singleRow);
         }
-
         return allElements;
     }
 
