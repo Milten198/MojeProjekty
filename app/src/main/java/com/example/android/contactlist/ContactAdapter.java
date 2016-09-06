@@ -6,15 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Collections;
 import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
 
-    List<SingleContactInfo> allElements = Collections.EMPTY_LIST;
+    List<SingleContactInfo> allElements;
     LayoutInflater inflater;
 
     public ContactAdapter(Context context, List<SingleContactInfo> allElements) {
@@ -25,8 +23,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.single_row, parent, false);
-        ContactViewHolder viewHolder = new ContactViewHolder(view);
-        return viewHolder;
+        return new ContactViewHolder(view);
     }
 
     @Override

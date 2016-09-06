@@ -1,7 +1,5 @@
 package com.example.android.contactlist;
 
-import android.content.ContentValues;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -10,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.android.contactlist.Data.ContactContract;
@@ -27,36 +24,18 @@ public class MainActivity extends AppCompatActivity implements ContactInfoListen
     SingleContactInfo singleContact;
     List<SingleContactInfo> contactInfos;
     ContactDbHelper dbHelper;
+    String tableName = ContactContract.ContactEntry.TABLE_NAME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        contactInfos = new ArrayList<>();
         dbHelper = new ContactDbHelper(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ContactAdapter(this, loadMockData());
+        adapter = new ContactAdapter(this, loadData());
         recyclerView.setAdapter(adapter);
-    }
-
-
-    public List<SingleContactInfo> loadMockData() {
-        Resources resources = getResources();
-        List<SingleContactInfo> allElements = new ArrayList<>();
-        String[] names = resources.getStringArray(R.array.names);
-        String[] surnames = resources.getStringArray(R.array.surnames);
-        String[] emails = resources.getStringArray(R.array.emails);
-        String[] age = resources.getStringArray(R.array.age);
-
-        for (int i = 0; i < 10; i++) {
-            SingleContactInfo singleRow = new SingleContactInfo();
-            singleRow.name = names[i];
-            singleRow.surname = surnames[i];
-            singleRow.email = emails[i];
-            singleRow.age = age[i];
-            allElements.add(singleRow);
-        }
-        return allElements;
     }
 
     public void addContact(View view) {
@@ -69,43 +48,33 @@ public class MainActivity extends AppCompatActivity implements ContactInfoListen
         removeDialogFragment.show(fm, "remove");
     }
 
-    @Override
-    public void onFinishUserDialog(List<SingleContactInfo> infoLists) {
-
-        contactInfos = new ArrayList<>();
-        singleContact = infoLists.get(0);
-        contactInfos.add(singleContact);
-
-        Toast.makeText(this, singleContact.name, Toast.LENGTH_LONG).show();
-    }
-
-    public void confirmContact(View view) {
+    public List<SingleContactInfo> loadData() {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        SingleContactInfo singleContactInfo = new SingleContactInfo();
-        String name = singleContactInfo.name;
-        String surname = singleContactInfo.surname;
-        String email = singleContactInfo.email;
-        String age = singleContactInfo.age;
+        Cursor cursor = db.query(tableName, null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            SingleContactInfo contactInfo = new SingleContactInfo();
+            int userNameId = cursor.getColumnIndex(ContactContract.ContactEntry.COLUMN_USER_NAME);
+            String userName = cursor.getString(userNameId);
+            int userSurnameId = cursor.getColumnIndex(ContactContract.ContactEntry.COLUMN_USER_SURNAME);
+            String userSurame = cursor.getString(userSurnameId);
+            int userEmailId = cursor.getColumnIndex(ContactContract.ContactEntry.COLUMN_USER_EMAIL);
+            String userEmail = cursor.getString(userEmailId);
+            int userAgeId = cursor.getColumnIndex(ContactContract.ContactEntry.COLUMN_USER_AGE);
+            String userAge = cursor.getString(userAgeId);
 
-        ContentValues values = new ContentValues();
-        values.put("name", name);
-        values.put("surname", surname);
-        values.put("email", email);
-        values.put("age", age);
-
-        db.insert(ContactContract.ContactEntry.TABLE_NAME, null, values);
-        checkDatabase();
+            contactInfo.name = userName;
+            contactInfo.surname = userSurame;
+            contactInfo.email = userEmail;
+            contactInfo.age = userAge;
+            contactInfos.add(contactInfo);
+        }
+        return contactInfos;
     }
 
-    public void checkDatabase() {
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        Cursor cursor = database.query(ContactContract.ContactEntry.TABLE_NAME, null, null, null, null, null, null);
-        StringBuffer buffer = new StringBuffer();
-        while (cursor.moveToNext()) {
-            int index = cursor.getColumnIndex(ContactContract.ContactEntry.COLUMN_USER_SURNAME);
-            String surnameA = cursor.getString(index);
-            buffer.append(surnameA);
+    @Override
+    public void onFinishUserDialog(boolean hasChanged) {
+        if (hasChanged) {
+            Toast.makeText(this, "True", Toast.LENGTH_LONG).show();
         }
-        System.out.print(buffer);
     }
 }

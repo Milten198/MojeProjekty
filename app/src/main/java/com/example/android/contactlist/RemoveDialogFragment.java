@@ -44,7 +44,6 @@ public class RemoveDialogFragment extends DialogFragment {
         confirmRemovingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ContactInfoListener contactInfoListener = (ContactInfoListener) getActivity();
                 contactInfoList = new ArrayList<SingleContactInfo>();
 
                 SingleContactInfo singleContactInfo = new SingleContactInfo();
@@ -54,8 +53,6 @@ public class RemoveDialogFragment extends DialogFragment {
                 singleContactInfo.age = null;
 
                 contactInfoList.add(singleContactInfo);
-
-                contactInfoListener.onFinishUserDialog(contactInfoList);
                 dismiss();
             }
         });

@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_margin="35dp"
     android:minHeight="400dp"
     android:minWidth="400dp"
+    android:orientation="vertical"
     android:padding="20dp">
-
-    <TextView
-        android:id="@+id/addTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/complete_all_the_fields"
-        android:textSize="22sp"
-        android:layout_marginBottom="15dp"
-        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:text="@string/name_to_type"
-            android:textSize="20sp"
-            android:layout_marginEnd="20dp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/nameEditText"
@@ -43,15 +33,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:text="@string/surname_field"
-            android:textSize="20sp"
-            android:layout_marginEnd="20dp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/surnameEditText"
@@ -63,42 +53,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:text="@string/emailField"
-            android:textSize="20sp"
-            android:layout_marginEnd="20dp"/>
+            android:textSize="20sp" />
 
         <EditText
-            android:inputType="textEmailAddress"
             android:id="@+id/emailEditText"
             android:layout_width="200dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
             android:text="@string/age_field"
-            android:textSize="20sp"
-            android:layout_marginEnd="20dp"/>
+            android:textSize="20sp" />
 
         <EditText
-            android:inputType="number"
             android:id="@+id/ageEditText"
             android:layout_width="200dp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="text" />
 
     </LinearLayout>
 
@@ -109,21 +99,20 @@
 
         <Button
             android:id="@+id/cancelButton"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            android:onClick="cancelContact"/>
+            android:layout_weight="1"
+            android:onClick="cancelContact"
+            android:text="@string/cancel" />
 
         <Button
             android:id="@+id/confirmButton"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/add"
-            android:onClick="confirmContact"/>
+            android:layout_weight="1"
+            android:onClick="confirmContact"
+            android:text="@string/add" />
     </LinearLayout>
-
 
 
 </LinearLayout>
