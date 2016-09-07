@@ -64,10 +64,15 @@ public class AddDialogFragment extends DialogFragment {
                 values.put("email", email);
                 values.put("age", age);
 
-                db.insert(tableName, null, values);
-                contactInfoListener.onFinishUserDialog(true);
-                dismiss();
+                SingleContactInfo singleContactInfo = new SingleContactInfo();
+                singleContactInfo.name = name;
+                singleContactInfo.surname = surname;
+                singleContactInfo.email = email;
+                singleContactInfo.age = age;
 
+                db.insert(tableName, null, values);
+                contactInfoListener.onFinishUserDialog(singleContactInfo);
+                dismiss();
             }
         });
         return view;

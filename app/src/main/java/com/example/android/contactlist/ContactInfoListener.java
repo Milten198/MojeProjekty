@@ -1,5 +1,5 @@
 package com.example.android.contactlist;
 
 public interface ContactInfoListener {
-    void onFinishUserDialog(boolean hasChanged);
+    void onFinishUserDialog(SingleContactInfo singleContactInfo);
 }

@@ -15,8 +15,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     List<SingleContactInfo> allElements;
     LayoutInflater inflater;
 
-    public ContactAdapter(Context context, List<SingleContactInfo> allElements) {
-        this.allElements = allElements;
+
+    public ContactAdapter(Context context) {
         inflater = LayoutInflater.from(context);
     }
 
@@ -38,6 +38,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     @Override
     public int getItemCount() {
         return allElements.size();
+    }
+
+    public void setData(List<SingleContactInfo> allElements) {
+        this.allElements = allElements;
+    }
+
+    public void insertPerson(SingleContactInfo singleContactInfo) {
+        allElements.add(singleContactInfo);
+        notifyItemRemoved(0);
     }
 
     class ContactViewHolder extends RecyclerView.ViewHolder {

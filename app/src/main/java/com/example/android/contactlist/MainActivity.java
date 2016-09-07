@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements ContactInfoListen
     ContactDbHelper dbHelper;
     String tableName = ContactContract.ContactEntry.TABLE_NAME;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +35,10 @@ public class MainActivity extends AppCompatActivity implements ContactInfoListen
         dbHelper = new ContactDbHelper(this);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ContactAdapter(this, loadData());
+        adapter = new ContactAdapter(this);
+        adapter.setData(loadData());
         recyclerView.setAdapter(adapter);
+
     }
 
     public void addContact(View view) {
@@ -72,9 +75,7 @@ public class MainActivity extends AppCompatActivity implements ContactInfoListen
     }
 
     @Override
-    public void onFinishUserDialog(boolean hasChanged) {
-        if (hasChanged) {
-            Toast.makeText(this, "True", Toast.LENGTH_LONG).show();
-        }
+    public void onFinishUserDialog(SingleContactInfo singleContactInfo) {
+        adapter.insertPerson(singleContactInfo);
     }
 }
