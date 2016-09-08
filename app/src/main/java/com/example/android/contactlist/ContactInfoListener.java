@@ -1,5 +1,6 @@
 package com.example.android.contactlist;
 
 public interface ContactInfoListener {
-    void onFinishUserDialog(SingleContactInfo singleContactInfo);
+    void onFinishUserAddDialog(SingleContactInfo singleContactInfo);
+    void onFinishUserRemoveDialog(SingleContactInfo singleContactInfo);
 }

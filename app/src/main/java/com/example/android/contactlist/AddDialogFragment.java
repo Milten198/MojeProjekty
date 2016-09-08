@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.android.contactlist.Data.ContactContract;
 import com.example.android.contactlist.Data.ContactDbHelper;
@@ -64,14 +63,10 @@ public class AddDialogFragment extends DialogFragment {
                 values.put("email", email);
                 values.put("age", age);
 
-                SingleContactInfo singleContactInfo = new SingleContactInfo();
-                singleContactInfo.name = name;
-                singleContactInfo.surname = surname;
-                singleContactInfo.email = email;
-                singleContactInfo.age = age;
+                SingleContactInfo singleContactInfo = new SingleContactInfo(name, surname, email, age);
 
                 db.insert(tableName, null, values);
-                contactInfoListener.onFinishUserDialog(singleContactInfo);
+                contactInfoListener.onFinishUserAddDialog(singleContactInfo);
                 dismiss();
             }
         });

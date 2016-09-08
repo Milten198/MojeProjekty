@@ -75,7 +75,12 @@ public class MainActivity extends AppCompatActivity implements ContactInfoListen
     }
 
     @Override
-    public void onFinishUserDialog(SingleContactInfo singleContactInfo) {
+    public void onFinishUserAddDialog(SingleContactInfo singleContactInfo) {
         adapter.insertPerson(singleContactInfo);
+    }
+
+    @Override
+    public void onFinishUserRemoveDialog(SingleContactInfo singleContactInfo) {
+        adapter.removePerson(singleContactInfo);
     }
 }

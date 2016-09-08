@@ -8,13 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
 
     List<SingleContactInfo> allElements;
     LayoutInflater inflater;
-
+    List<SingleContactInfo> toRemove = new ArrayList<>();
 
     public ContactAdapter(Context context) {
         inflater = LayoutInflater.from(context);
@@ -46,7 +47,18 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     public void insertPerson(SingleContactInfo singleContactInfo) {
         allElements.add(singleContactInfo);
-        notifyItemRemoved(0);
+        notifyItemChanged(0);
+    }
+
+    public void removePerson(SingleContactInfo singleContactInfo) {
+        for (SingleContactInfo x : allElements) {
+            if (singleContactInfo.name.equals(x.name) && singleContactInfo.surname.equals(x.surname)) {
+                toRemove.add(x);
+            }
+        }
+        allElements.removeAll(toRemove);
+        toRemove.clear();
+        notifyDataSetChanged();
     }
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
